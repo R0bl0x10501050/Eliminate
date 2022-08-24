@@ -25,7 +25,7 @@ local toolbar = plugin:CreateToolbar("Eliminate")
 
 local NewButton = toolbar:CreateButton("Open Panel", "Start scanning scripts for malicious content", "rbxassetid://6942427800")
 
-local VERSION = "0.6.9"
+local VERSION = "1.0.0"
 
 local Widget
 
@@ -73,14 +73,38 @@ local keywords = {
 	'gnirts', -- 'string'
 	'elbat', -- 'table'
 	'esrever', -- 'reverse'
+	'\101\114\105\117\113\101\114',
 	"string.reverse('\101\114\105\117\113\101\114')",
-	'string.reverse("\101\114\105\117\113\101\114")' -- ;) |  print(string.reverse("\101\114\105\117\113\101\114"))
+	'string.reverse("\101\114\105\117\113\101\114")', -- ;) |  print(string.reverse("\101\114\105\117\113\101\114"))
+	'loadstring'
 }
 
-local names = {
+local names = { -- COMMON VIRUS NAMES
 	'vaccine',
 	'spread',
 	'injection',
+	'infection',
+	'script... or is it...',
+	'antilag',
+	'fire',
+	'propergrammer',
+	'anti-lag',
+	'antilag',
+	'4d being',
+	'virus',
+	'n00b 4tt4ck',
+	'tehscript',
+	'snapreducer',
+	'guesttalking',
+	'4dbeing',
+	'join teh moovment!',
+	'ohai',
+	'oh snap you got infected xd xd xd',
+	'loser',
+	'infected',
+	'rofl',
+	'propergr?mmerneededinphilosiphallocations;insertnoobhere',
+	'dont worry im a friendly virus',
 }
 
 local snippets = {
@@ -90,6 +114,8 @@ local snippets = {
 	'ro-loader',
 	'not a virus',
 	'do not delete',
+	'script... or is it...',
+	'loadstring'
 }
 
 NewButton.Click:Connect(function()
@@ -109,317 +135,34 @@ NewButton.Click:Connect(function()
 		Widget.Enabled = true
 
 		--// UI SETUP \\--
-
-		local Frame = Instance.new("Frame", Widget)
-		Frame.Name = "Frame"
-		Frame.BackgroundColor3 = Color3.fromRGB(71,71,71)
-		Frame.BackgroundTransparency = 0
-		Frame.BorderSizePixel = 0
-		Frame.Position = UDim2.fromScale(0, 0)
-		Frame.Size = UDim2.fromScale(1, 1)
-
-		local Bottom = Instance.new("Frame", Frame)
-		Bottom.Name = "Bottom"
-		Bottom.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-		Bottom.BackgroundTransparency = 0
-		Bottom.BorderSizePixel = 0
-		Bottom.Position = UDim2.fromScale(0, 0.957)
-		Bottom.Size = UDim2.fromScale(1, 0.042)
-		Bottom.ZIndex = 2
 		
-		local HR1 = Instance.new("Frame", Frame)
-		HR1.Name = "HR1"
-		HR1.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-		HR1.BackgroundTransparency = 0
-		HR1.BorderSizePixel = 0
-		HR1.Position = UDim2.fromScale(0, 0.165)
-		HR1.Size = UDim2.fromScale(1, 0.007)
-		HR1.ZIndex = 2
+		local MainFrame = script.Parent:FindFirstChild("Frame"):Clone()
+		MainFrame.Parent = Widget
 		
-		local HR2 = Instance.new("Frame", Frame)
-		HR2.Name = "HR2"
-		HR2.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-		HR2.BackgroundTransparency = 0
-		HR2.BorderSizePixel = 0
-		HR2.Position = UDim2.fromScale(0, 0.771)
-		HR2.Size = UDim2.fromScale(1, 0.007)
-		HR2.ZIndex = 2
-		
-		local HR3 = Instance.new("Frame", Frame)
-		HR3.Name = "HR3"
-		HR3.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-		HR3.BackgroundTransparency = 0
-		HR3.BorderSizePixel = 0
-		HR3.Position = UDim2.fromScale(0, 0.496)
-		HR3.Size = UDim2.fromScale(1, 0.007)
-		HR3.ZIndex = 2
-		
-		local Bottom_TextLabel_1 = Instance.new("TextLabel", Bottom)
-		Bottom_TextLabel_1.Name = "Bottom_TextLabel_1"
-		Bottom_TextLabel_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Bottom_TextLabel_1.BackgroundTransparency = 1
-		Bottom_TextLabel_1.Position = UDim2.fromScale(0.025, 0)
-		Bottom_TextLabel_1.Size = UDim2.fromScale(0.475, 1)
-		Bottom_TextLabel_1.Font = Enum.Font.SourceSans
-		Bottom_TextLabel_1.Text = "R0bl0x10501050"
-		Bottom_TextLabel_1.TextColor3 = Color3.fromRGB(157, 157, 157)
-		Bottom_TextLabel_1.TextScaled = true
-		Bottom_TextLabel_1.ZIndex = 2
-		
-		local Bottom_TextLabel_2 = Instance.new("TextLabel", Bottom)
-		Bottom_TextLabel_2.Name = "Bottom_TextLabel_2"
-		Bottom_TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Bottom_TextLabel_2.BackgroundTransparency = 1
-		Bottom_TextLabel_2.Position = UDim2.fromScale(0.5, 0)
-		Bottom_TextLabel_2.Size = UDim2.fromScale(0.475, 1)
-		Bottom_TextLabel_2.Font = Enum.Font.SourceSans
-		Bottom_TextLabel_2.Text = "v"..VERSION
-		Bottom_TextLabel_2.TextColor3 = Color3.fromRGB(157, 157, 157)
-		Bottom_TextLabel_2.TextScaled = true
-		Bottom_TextLabel_2.ZIndex = 2
-		
-		local Title = Instance.new("TextLabel", Frame)
-		Title.Name = "Title"
-		Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title.BackgroundTransparency = 1
-		Title.Position = UDim2.fromScale(0, 0.022)
-		Title.Size = UDim2.fromScale(1, 0.123)
-		Title.ClipsDescendants = true
-		Title.Font = Enum.Font.Gotham
-		Title.RichText = true
-		Title.Text = "<b>Eliminate</b>"
-		Title.TextColor3 = Color3.fromRGB(245, 245, 245)
-		Title.TextScaled = true
-		Title.ZIndex = 1
-		
-		local Title_Glint = Instance.new("Frame", Title)
-		Title_Glint.Name = "Glint"
-		Title_Glint.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title_Glint.BackgroundTransparency = 0.75
-		Title_Glint.BorderSizePixel = 0
-		Title_Glint.Position = UDim2.fromScale(1, -1.75)
-		Title_Glint.Rotation = -22.5
-		Title_Glint.Size = UDim2.fromScale(0.051, 1.1)
-		Title_Glint.ZIndex = 2
-		
-		local VKeywords = Instance.new("TextLabel", Frame)
-		VKeywords.Name = "VKeywords"
-		VKeywords.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		VKeywords.BackgroundTransparency = 1
-		VKeywords.Position = UDim2.fromScale(0.025, 0.37)
-		VKeywords.Size = UDim2.fromScale(0.544, 0.081)
-		VKeywords.Font = Enum.Font.Gotham
-		VKeywords.Text = "Keywords"
-		VKeywords.TextColor3 = Color3.fromRGB(197, 197, 197)
-		VKeywords.TextScaled = true
-		VKeywords.TextXAlignment = Enum.TextXAlignment.Right
-		VKeywords.ZIndex = 2
-		
-		local VNames = Instance.new("TextLabel", Frame)
-		VNames.Name = "VNames"
-		VNames.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		VNames.BackgroundTransparency = 1
-		VNames.Position = UDim2.fromScale(0.024, 0.19)
-		VNames.Size = UDim2.fromScale(0.544, 0.081)
-		VNames.Font = Enum.Font.Gotham
-		VNames.Text = "Names"
-		VNames.TextColor3 = Color3.fromRGB(197, 197, 197)
-		VNames.TextScaled = true
-		VNames.TextXAlignment = Enum.TextXAlignment.Right
-		VNames.ZIndex = 2
-		
-		local VSnippets = Instance.new("TextLabel", Frame)
-		VSnippets.Name = "VSnippets"
-		VSnippets.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		VSnippets.BackgroundTransparency = 1
-		VSnippets.Position = UDim2.fromScale(0.024, 0.282)
-		VSnippets.Size = UDim2.fromScale(0.544, 0.081)
-		VSnippets.Font = Enum.Font.Gotham
-		VSnippets.Text = "Snippets"
-		VSnippets.TextColor3 = Color3.fromRGB(197, 197, 197)
-		VSnippets.TextScaled = true
-		VSnippets.TextXAlignment = Enum.TextXAlignment.Right
-		VSnippets.ZIndex = 2
-		
-		local DirSelect = Instance.new("TextButton", Frame)
-		DirSelect.Name = "DirSelect"
-		DirSelect.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
-		DirSelect.BackgroundTransparency = 0
-		DirSelect.BorderSizePixel = 0
-		DirSelect.Position = UDim2.fromScale(0.152, 0.535)
-		DirSelect.Size = UDim2.fromScale(0.669, 0.092)
-		DirSelect.Font = Enum.Font.SourceSans
-		DirSelect.Text = ""
-		DirSelect.TextColor3 = Color3.fromRGB(197, 197, 197)
-		DirSelect.TextScaled = true
-		DirSelect.ZIndex = 2
-		
-		local Empty = Instance.new("TextButton", Frame)
-		Empty.Name = "Empty"
-		Empty.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
-		Empty.BackgroundTransparency = 0
-		Empty.BorderSizePixel = 0
-		Empty.Position = UDim2.fromScale(0.158, 0.65)
-		Empty.Size = UDim2.fromScale(0.669, 0.092)
-		Empty.Font = Enum.Font.SourceSans
-		Empty.Text = ""
-		Empty.TextColor3 = Color3.fromRGB(197, 197, 197)
-		Empty.TextScaled = true
-		Empty.ZIndex = 2
-		
-		local Scan = Instance.new("TextButton", Frame)
-		Scan.Name = "Scan"
-		Scan.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
-		Scan.BackgroundTransparency = 0
-		Scan.BorderSizePixel = 0
-		Scan.Position = UDim2.fromScale(0.19, 0.811)
-		Scan.Size = UDim2.fromScale(0.618, 0.119)
-		Scan.Font = Enum.Font.Gotham
-		Scan.Text = "Scan"
-		Scan.TextColor3 = Color3.fromRGB(197, 197, 197)
-		Scan.TextScaled = true
-		Scan.ZIndex = 2
-		
-		local DirSelect_TextLabel = Instance.new("TextLabel", DirSelect)
-		DirSelect_TextLabel.Name = "TextLabel"
-		DirSelect_TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		DirSelect_TextLabel.BackgroundTransparency = 1
-		DirSelect_TextLabel.Position = UDim2.fromScale(0.093, 0.06)
-		DirSelect_TextLabel.Size = UDim2.fromScale(0.813, 0.86)
-		DirSelect_TextLabel.Font = Enum.Font.SourceSans
-		DirSelect_TextLabel.Text = "Choose Directory"
-		DirSelect_TextLabel.TextColor3 = Color3.fromRGB(197, 197, 197)
-		DirSelect_TextLabel.TextScaled = true
-		DirSelect_TextLabel.ZIndex = 2
-		
-		local Empty_TextLabel = Instance.new("TextLabel", Empty)
-		Empty_TextLabel.Name = "TextLabel"
-		Empty_TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Empty_TextLabel.BackgroundTransparency = 1
-		Empty_TextLabel.Position = UDim2.fromScale(0.085, 0.06)
-		Empty_TextLabel.Size = UDim2.fromScale(0.813, 0.86)
-		Empty_TextLabel.Font = Enum.Font.SourceSans
-		Empty_TextLabel.Text = "Empty Quarantine"
-		Empty_TextLabel.TextColor3 = Color3.fromRGB(197, 197, 197)
-		Empty_TextLabel.TextScaled = true
-		Empty_TextLabel.ZIndex = 2
-		
-		local VKeywords_One = Instance.new("TextButton", VKeywords)
-		VKeywords_One.Name = "VKeywords_One"
-		VKeywords_One.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
-		VKeywords_One.BackgroundTransparency = 0
-		VKeywords_One.Position = UDim2.fromScale(1.085, 0.068)
-		VKeywords_One.Size = UDim2.fromScale(0.185, 0.841)
-		VKeywords_One.Font = Enum.Font.Gotham
-		VKeywords_One.Text = "1"
-		VKeywords_One.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VKeywords_One.TextScaled = true
-		VKeywords_One:SetAttribute('Strength', 2)
-		VKeywords_One.ZIndex = 2
-		
-		local VKeywords_Two = Instance.new("TextButton", VKeywords)
-		VKeywords_Two.Name = "VKeywords_Two"
-		VKeywords_Two.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
-		VKeywords_Two.BackgroundTransparency = 0
-		VKeywords_Two.Position = UDim2.fromScale(1.32, 0.068)
-		VKeywords_Two.Size = UDim2.fromScale(0.185, 0.841)
-		VKeywords_Two.Font = Enum.Font.Gotham
-		VKeywords_Two.Text = "2"
-		VKeywords_Two.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VKeywords_Two.TextScaled = true
-		VKeywords_Two:SetAttribute('Strength', 2)
-		VKeywords_Two.ZIndex = 2
-		
-		local VKeywords_Three = Instance.new("TextButton", VKeywords)
-		VKeywords_Three.Name = "VKeywords_Three"
-		VKeywords_Three.BackgroundColor3 = Color3.fromRGB(64, 161, 235)
-		VKeywords_Three.BackgroundTransparency = 0
-		VKeywords_Three.Position = UDim2.fromScale(1.56, 0.068)
-		VKeywords_Three.Size = UDim2.fromScale(0.185, 0.841)
-		VKeywords_Three.Font = Enum.Font.Gotham
-		VKeywords_Three.Text = "3"
-		VKeywords_Three.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VKeywords_Three.TextScaled = true
-		VKeywords_Three:SetAttribute('Strength', 2)
-		VKeywords_Three.ZIndex = 2
-		
-		local VNames_One = Instance.new("TextButton", VNames)
-		VNames_One.Name = "VNames_One"
-		VNames_One.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
-		VNames_One.BackgroundTransparency = 0
-		VNames_One.Position = UDim2.fromScale(1.085, 0.068)
-		VNames_One.Size = UDim2.fromScale(0.185, 0.841)
-		VNames_One.Font = Enum.Font.Gotham
-		VNames_One.Text = "1"
-		VNames_One.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VNames_One.TextScaled = true
-		VNames_One:SetAttribute('Strength', 1)
-		VNames_One.ZIndex = 2
-		
-		local VNames_Two = Instance.new("TextButton", VNames)
-		VNames_Two.Name = "VNames_Two"
-		VNames_Two.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
-		VNames_Two.BackgroundTransparency = 0
-		VNames_Two.Position = UDim2.fromScale(1.32, 0.068)
-		VNames_Two.Size = UDim2.fromScale(0.185, 0.841)
-		VNames_Two.Font = Enum.Font.Gotham
-		VNames_Two.Text = "2"
-		VNames_Two.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VNames_Two.TextScaled = true
-		VNames_Two:SetAttribute('Strength', 2)
-		VNames_Two.ZIndex = 2
-		
-		local VNames_Three = Instance.new("TextButton", VNames)
-		VNames_Three.Name = "VNames_Three"
-		VNames_Three.BackgroundColor3 = Color3.fromRGB(64, 161, 235)
-		VNames_Three.BackgroundTransparency = 0
-		VNames_Three.Position = UDim2.fromScale(1.56, 0.068)
-		VNames_Three.Size = UDim2.fromScale(0.185, 0.841)
-		VNames_Three.Font = Enum.Font.Gotham
-		VNames_Three.Text = "3"
-		VNames_Three.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VNames_Three.TextScaled = true
-		VNames_Three:SetAttribute('Strength', 3)
-		VNames_Three.ZIndex = 2
-		
-		local VSnippets_One = Instance.new("TextButton", VSnippets)
-		VSnippets_One.Name = "VSnippets_One"
-		VSnippets_One.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
-		VSnippets_One.BackgroundTransparency = 0
-		VSnippets_One.Position = UDim2.fromScale(1.085, 0.068)
-		VSnippets_One.Size = UDim2.fromScale(0.185, 0.841)
-		VSnippets_One.Font = Enum.Font.Gotham
-		VSnippets_One.Text = "1"
-		VSnippets_One.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VSnippets_One.TextScaled = true
-		VSnippets_One:SetAttribute('Strength', 1)
-		VSnippets_One.ZIndex = 2
-		
-		local VSnippets_Two = Instance.new("TextButton", VSnippets)
-		VSnippets_Two.Name = "VSnippets_Two"
-		VSnippets_Two.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
-		VSnippets_Two.BackgroundTransparency = 0
-		VSnippets_Two.Position = UDim2.fromScale(1.32, 0.068)
-		VSnippets_Two.Size = UDim2.fromScale(0.185, 0.841)
-		VSnippets_Two.Font = Enum.Font.Gotham
-		VSnippets_Two.Text = "2"
-		VSnippets_Two.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VSnippets_Two.TextScaled = true
-		VSnippets_Two:SetAttribute('Strength', 2)
-		VSnippets_Two.ZIndex = 2
-		
-		local VSnippets_Three = Instance.new("TextButton", VSnippets)
-		VSnippets_Three.Name = "VSnippets_Three"
-		VSnippets_Three.BackgroundColor3 = Color3.fromRGB(64, 161, 235)
-		VSnippets_Three.BackgroundTransparency = 0
-		VSnippets_Three.Position = UDim2.fromScale(1.56, 0.068)
-		VSnippets_Three.Size = UDim2.fromScale(0.185, 0.841)
-		VSnippets_Three.Font = Enum.Font.Gotham
-		VSnippets_Three.Text = "3"
-		VSnippets_Three.TextColor3 = Color3.fromRGB(255, 255, 255)
-		VSnippets_Three.TextScaled = true
-		VSnippets_Three:SetAttribute('Strength', 3)
-		VSnippets_Three.ZIndex = 2
+		local Bottom = MainFrame.Bottom
+		local DirSelect = MainFrame.DirSelect
+		local View = MainFrame.ViewQuarantine
+		local Empty = MainFrame.Empty
+		local Title = MainFrame.Title
+		local VKeywords = MainFrame.VKeywords
+		local VNames = MainFrame.VNames
+		local VSnippets = MainFrame.VSnippets
+		local VKeywords_One = VKeywords.One
+		local VKeywords_Two = VKeywords.Two
+		local VKeywords_Three = VKeywords.Three
+		local VNames_One = VNames.One
+		local VNames_Two = VNames.Two
+		local VNames_Three = VNames.Three
+		local VSnippets_One = VSnippets.One
+		local VSnippets_Two = VSnippets.Two
+		local VSnippets_Three = VSnippets.Three
+		local DirSelect_TextLabel = DirSelect.TextLabel
+		local View_TextLabel = DirSelect.TextLabel
+		local Empty_TextLabel = DirSelect.TextLabel
+		local Title_Glint = Title.UIGradient
+		local Scan = MainFrame.Scan
+		local ViewScripts = MainFrame.ViewScripts
+		local View_Close = ViewScripts.Close
 		
 		local Title_UIGradient = Instance.new("UIGradient", Title)
 		Title_UIGradient.Color = ColorSequence.new({
@@ -490,9 +233,9 @@ NewButton.Click:Connect(function()
 		end
 
 		DirSelect.MouseButton1Click:Connect(function()
+			DirSelect_TextLabel.Text = "Select"
 			local connection
-			connection = Selection.SelectionChanged:Connect(function()
-				connection:Disconnect()
+			connection = Selection.SelectionChanged:Once(function()
 				selectedDirectory = Selection:Get()[1]
 				DirSelect_TextLabel.Text = "Changed!"
 				DirSelect.Active = false
@@ -606,6 +349,35 @@ NewButton.Click:Connect(function()
 				end
 			end
 		end)
+		
+		View.MouseButton1Click:Connect(function()
+			local draft = ViewScripts.ScrollingFrame.DRAFT
+			
+			for _, v in ipairs(quarantineFolder:GetChildren()) do
+				local c = draft:Clone()
+				c.Parent = draft.Parent
+				c.Name = math.random(0, 100000)
+				c.Title.Text = v.Name
+				c.Reasons.Text = v:GetAttribute("Eliminate_Reasons") or "Legacy scan detected"
+				c.Visible = true
+				c.Delete.MouseButton1Click:Once(function()
+					ChangeHistoryService:SetWaypoint("[ELIMINATE] - Manually removing virus")
+					v:Destroy()
+					c:Destroy()
+					ChangeHistoryService:SetWaypoint("[ELIMINATE] - Manually removed virus")
+				end)
+			end
+			
+			View_Close.MouseButton1Click:Connect(function()
+				for _, v in ipairs(draft.Parent:GetChildren()) do
+					if v.Name:upper() == "DRAFT" or v.ClassName ~= "Frame" then continue end
+					v:Destroy()
+				end
+				ViewScripts.Visible = false
+			end)
+			
+			ViewScripts.Visible = true
+		end)
 
 		Scan.MouseButton1Click:Connect(function()
 			warn("ELIMINATE - Scanning")
@@ -613,7 +385,11 @@ NewButton.Click:Connect(function()
 
 				local function scanKeywords()
 					if not inst:IsA("LuaSourceContainer") then return end
+					local reasons = {}
 					local src = inst.Source
+					
+					local allReasons = {}
+					
 					for _, v in ipairs(keywords) do
 						if string.find(string.lower(src), v) then
 							if v == "require" then
@@ -641,37 +417,53 @@ NewButton.Click:Connect(function()
 									local threatLevel = 0
 
 									if productInfo.IsPublicDomain == false then
+										table.insert(reasons, "unsafe")
 										threatLevel += 0.75
 									else
 										if productInfo.Sales < math.random(150, 350) then -- reduces chance of people trying to cheat the system
+											table.insert(reasons, "unpopular")
 											threatLevel += 0.5
 										end
 									end
 
 									if productInfo.AssetTypeId == 5 then
+										table.insert(reasons, "script")
 										threatLevel += 1
 									elseif productInfo.AssetTypeId == 10 then
+										table.insert(reasons, "model")
 										threatLevel += 0.5
+									elseif productInfo.AssetTypeId == 32 then
+										table.insert(reasons, "package")
+										threatLevel += 1
 									end
-
-									if doesPlayerOwnAsset == true then
-										threatLevel -= 1
-									end
-
+									
+									-- This shouldn't be a factor at all... what was I thinking?
+									--if doesPlayerOwnAsset == true then
+									--	threatLevel -= 1
+									--end
+									
 									print(" - Threat Level: "..threatLevel)
 									if threatLevel >= 1 then
-										return true
-									else
-										return false
+										table.insert(allReasons, "Requires: " .. table.concat(reasons, ", "))
+										--return true, "Requires: " .. table.concat(reasons, ", ")
+									--else
+									--	return false
 									end
 								else
-									return true
+									table.insert(allReasons, "Requires (cannot decode)")
+									--return true, "Requires (cannot decode)"
 								end
 							else
-								return true
+								table.insert(allReasons, "Keyword: " .. v)
+								--return true, "Keyword: " .. v
 							end
 						end
 					end
+					
+					if #allReasons > 0 then
+						return true, table.concat(allReasons, "; ")
+					end
+					
 					return false
 				end
 
@@ -679,7 +471,7 @@ NewButton.Click:Connect(function()
 					if not inst:IsA("LuaSourceContainer") then return end
 					for _, v in ipairs(names) do
 						if v == string.lower(inst.Name) then
-							return true
+							return true, "Script name: " .. v
 						end
 					end
 					return false
@@ -690,64 +482,75 @@ NewButton.Click:Connect(function()
 					local src = inst.Source
 					for _, v in ipairs(snippets) do
 						if string.find(string.lower(src), v) then
-							return true
+							return true, "Snippet: " .. v
 						end
 					end
 					return false
+				end
+				
+				local function scanLinkedSource()
+					if not inst:IsA("LuaSourceContainer") then return end
+					local lsrc = inst.LinkedSource
+					return lsrc ~= ''
 				end
 
 				local tbl_of_three = {}
 				local tbl_of_two = {}
 
-				local k_res
-				local n_res
-				local s_res
+				--local k_res
+				--local n_res
+				--local s_res
 
 				for k, v in next, strengths do
 					if v ~= 1 then
 						if k == "keyword_strength" then
-							k_res = scanKeywords()
+							local k_res, reason = scanKeywords()
 							if v == 2 then
-								table.insert(tbl_of_two, #tbl_of_two+1, k_res)
+								table.insert(tbl_of_two, {k_res, reason})
 							elseif v == 3 then
-								table.insert(tbl_of_three, #tbl_of_three+1, k_res)
+								table.insert(tbl_of_three, {k_res, reason})
 							end
 						elseif k == "name_strength" then
-							n_res = scanNames()
+							local n_res, reason = scanNames()
 							if v == 2 then
-								table.insert(tbl_of_two, #tbl_of_two+1, n_res)
+								table.insert(tbl_of_two, {n_res, reason})
 							elseif v == 3 then
-								table.insert(tbl_of_three, #tbl_of_three+1, n_res)
+								table.insert(tbl_of_three, {n_res, reason})
 							end
 						elseif k == "snippet_strength" then
-							s_res = scanSnippets()
+							local s_res, reason = scanSnippets()
 							if v == 2 then
-								table.insert(tbl_of_two, #tbl_of_two+1, s_res)
+								table.insert(tbl_of_two, {s_res, reason})
 							elseif v == 3 then
-								table.insert(tbl_of_three, #tbl_of_three+1, s_res)
+								table.insert(tbl_of_three, {s_res, reason})
 							end
 						end
 					end
 				end
+				
+				local lsrcCheck = scanLinkedSource()
+				if lsrcCheck then
+					return true, "Uses LinkedSource"
+				end
 
 				if tbl_of_three[1] == nil then
 					for _, v in ipairs(tbl_of_two) do
-						if v == true then
-							return true
+						if v[1] == true then
+							return true, v[2]
 						end
 					end
 
 					return false
 				else
 					for _, v in ipairs(tbl_of_three) do
-						if v == true then
-							return true
+						if v[1] == true then
+							return true, v[2]
 						end
 					end
 
 					for _, v in ipairs(tbl_of_two) do
-						if v == true then
-							return true
+						if v[1] == true then
+							return true, v[2]
 						end
 					end
 
@@ -758,11 +561,12 @@ NewButton.Click:Connect(function()
 			for _, v in pairs(selectedDirectory:GetDescendants()) do
 				if (not v:IsA("LuaSourceContainer")) or (v:IsA("CoreScript")) then continue end
 				print("Scanning "..v.Name)
-				local result = scanInst(v)
+				local result, reason = scanInst(v)
 				if result == true then
 					print("Detected "..v.Name)
 					-- v:SetAttribute('Eliminate_OriginalParent_Name', v.Parent.Name)
 					v:SetAttribute('Eliminate_OriginalParent_Id', v.Parent:GetDebugId(10))
+					v:SetAttribute('Eliminate_Reasons', reason)
 					v.Parent = quarantineFolder
 					if not v:IsA("ModuleScript") then
 						v.Disabled = true
@@ -774,14 +578,14 @@ NewButton.Click:Connect(function()
 			warn("ELIMINATE - Scan Complete")
 		end)
 		
-		coroutine.resume(coroutine.create(function()
-			while true do
-				wait(math.random(4, 7))
-				TweenService:Create(Title_Glint, TweenInfo.new(1, Enum.EasingStyle.Linear), {Position = UDim2.fromScale(-0.1, -1.75)}):Play()
-				wait(1)
-				Title_Glint.Position = UDim2.fromScale(1, -1.75)
-			end
-		end))
+		--coroutine.resume(coroutine.create(function()
+		--	while true do
+		--		wait(math.random(4, 7))
+		--		TweenService:Create(Title_Glint, TweenInfo.new(1, Enum.EasingStyle.Linear), {Position = UDim2.fromScale(-0.1, -1.75)}):Play()
+		--		wait(1)
+		--		Title_Glint.Position = UDim2.fromScale(1, -1.75)
+		--	end
+		--end))
 		
 		while true do
 			local t1 = math.random(1.75,3)
@@ -799,3 +603,323 @@ NewButton.Click:Connect(function()
 		end
 	end
 end)
+
+--[[
+
+THE FOLLOWING IS THE LEGACY CODE USED TO CONSTRUCT THE PLUGIN UI.
+THIS IS NO LONGER NEEDED AND HAS BEEN MOVED TO THE BOTTOM OF THE SCRIPT.
+
+FEEL FREE TO LOOK AROUND.
+
+]]
+
+--local Frame = Instance.new("Frame", Widget)
+--Frame.Name = "Frame"
+--Frame.BackgroundColor3 = Color3.fromRGB(71,71,71)
+--Frame.BackgroundTransparency = 0
+--Frame.BorderSizePixel = 0
+--Frame.Position = UDim2.fromScale(0, 0)
+--Frame.Size = UDim2.fromScale(1, 1)
+
+--local Bottom = Instance.new("Frame", Frame)
+--Bottom.Name = "Bottom"
+--Bottom.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+--Bottom.BackgroundTransparency = 0
+--Bottom.BorderSizePixel = 0
+--Bottom.Position = UDim2.fromScale(0, 0.957)
+--Bottom.Size = UDim2.fromScale(1, 0.042)
+--Bottom.ZIndex = 2
+
+--local HR1 = Instance.new("Frame", Frame)
+--HR1.Name = "HR1"
+--HR1.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+--HR1.BackgroundTransparency = 0
+--HR1.BorderSizePixel = 0
+--HR1.Position = UDim2.fromScale(0, 0.165)
+--HR1.Size = UDim2.fromScale(1, 0.007)
+--HR1.ZIndex = 2
+
+--local HR2 = Instance.new("Frame", Frame)
+--HR2.Name = "HR2"
+--HR2.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+--HR2.BackgroundTransparency = 0
+--HR2.BorderSizePixel = 0
+--HR2.Position = UDim2.fromScale(0, 0.771)
+--HR2.Size = UDim2.fromScale(1, 0.007)
+--HR2.ZIndex = 2
+
+--local HR3 = Instance.new("Frame", Frame)
+--HR3.Name = "HR3"
+--HR3.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+--HR3.BackgroundTransparency = 0
+--HR3.BorderSizePixel = 0
+--HR3.Position = UDim2.fromScale(0, 0.496)
+--HR3.Size = UDim2.fromScale(1, 0.007)
+--HR3.ZIndex = 2
+
+--local Bottom_TextLabel_1 = Instance.new("TextLabel", Bottom)
+--Bottom_TextLabel_1.Name = "Bottom_TextLabel_1"
+--Bottom_TextLabel_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--Bottom_TextLabel_1.BackgroundTransparency = 1
+--Bottom_TextLabel_1.Position = UDim2.fromScale(0.025, 0)
+--Bottom_TextLabel_1.Size = UDim2.fromScale(0.475, 1)
+--Bottom_TextLabel_1.Font = Enum.Font.SourceSans
+--Bottom_TextLabel_1.Text = "R0bl0x10501050"
+--Bottom_TextLabel_1.TextColor3 = Color3.fromRGB(157, 157, 157)
+--Bottom_TextLabel_1.TextScaled = true
+--Bottom_TextLabel_1.ZIndex = 2
+
+--local Bottom_TextLabel_2 = Instance.new("TextLabel", Bottom)
+--Bottom_TextLabel_2.Name = "Bottom_TextLabel_2"
+--Bottom_TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--Bottom_TextLabel_2.BackgroundTransparency = 1
+--Bottom_TextLabel_2.Position = UDim2.fromScale(0.5, 0)
+--Bottom_TextLabel_2.Size = UDim2.fromScale(0.475, 1)
+--Bottom_TextLabel_2.Font = Enum.Font.SourceSans
+--Bottom_TextLabel_2.Text = "v"..VERSION
+--Bottom_TextLabel_2.TextColor3 = Color3.fromRGB(157, 157, 157)
+--Bottom_TextLabel_2.TextScaled = true
+--Bottom_TextLabel_2.ZIndex = 2
+
+--local Title = Instance.new("TextLabel", Frame)
+--Title.Name = "Title"
+--Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--Title.BackgroundTransparency = 1
+--Title.Position = UDim2.fromScale(0, 0.022)
+--Title.Size = UDim2.fromScale(1, 0.123)
+--Title.ClipsDescendants = true
+--Title.Font = Enum.Font.Gotham
+--Title.RichText = true
+--Title.Text = "<b>Eliminate</b>"
+--Title.TextColor3 = Color3.fromRGB(245, 245, 245)
+--Title.TextScaled = true
+--Title.ZIndex = 1
+
+--local Title_Glint = Instance.new("Frame", Title)
+--Title_Glint.Name = "Glint"
+--Title_Glint.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--Title_Glint.BackgroundTransparency = 0.75
+--Title_Glint.BorderSizePixel = 0
+--Title_Glint.Position = UDim2.fromScale(1, -1.75)
+--Title_Glint.Rotation = -22.5
+--Title_Glint.Size = UDim2.fromScale(0.051, 1.1)
+--Title_Glint.ZIndex = 2
+
+--local VKeywords = Instance.new("TextLabel", Frame)
+--VKeywords.Name = "VKeywords"
+--VKeywords.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--VKeywords.BackgroundTransparency = 1
+--VKeywords.Position = UDim2.fromScale(0.025, 0.37)
+--VKeywords.Size = UDim2.fromScale(0.544, 0.081)
+--VKeywords.Font = Enum.Font.Gotham
+--VKeywords.Text = "Keywords"
+--VKeywords.TextColor3 = Color3.fromRGB(197, 197, 197)
+--VKeywords.TextScaled = true
+--VKeywords.TextXAlignment = Enum.TextXAlignment.Right
+--VKeywords.ZIndex = 2
+
+--local VNames = Instance.new("TextLabel", Frame)
+--VNames.Name = "VNames"
+--VNames.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--VNames.BackgroundTransparency = 1
+--VNames.Position = UDim2.fromScale(0.024, 0.19)
+--VNames.Size = UDim2.fromScale(0.544, 0.081)
+--VNames.Font = Enum.Font.Gotham
+--VNames.Text = "Names"
+--VNames.TextColor3 = Color3.fromRGB(197, 197, 197)
+--VNames.TextScaled = true
+--VNames.TextXAlignment = Enum.TextXAlignment.Right
+--VNames.ZIndex = 2
+
+--local VSnippets = Instance.new("TextLabel", Frame)
+--VSnippets.Name = "VSnippets"
+--VSnippets.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--VSnippets.BackgroundTransparency = 1
+--VSnippets.Position = UDim2.fromScale(0.024, 0.282)
+--VSnippets.Size = UDim2.fromScale(0.544, 0.081)
+--VSnippets.Font = Enum.Font.Gotham
+--VSnippets.Text = "Snippets"
+--VSnippets.TextColor3 = Color3.fromRGB(197, 197, 197)
+--VSnippets.TextScaled = true
+--VSnippets.TextXAlignment = Enum.TextXAlignment.Right
+--VSnippets.ZIndex = 2
+
+--local DirSelect = Instance.new("TextButton", Frame)
+--DirSelect.Name = "DirSelect"
+--DirSelect.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+--DirSelect.BackgroundTransparency = 0
+--DirSelect.BorderSizePixel = 0
+--DirSelect.Position = UDim2.fromScale(0.152, 0.535)
+--DirSelect.Size = UDim2.fromScale(0.669, 0.092)
+--DirSelect.Font = Enum.Font.SourceSans
+--DirSelect.Text = ""
+--DirSelect.TextColor3 = Color3.fromRGB(197, 197, 197)
+--DirSelect.TextScaled = true
+--DirSelect.ZIndex = 2
+
+--local Empty = Instance.new("TextButton", Frame)
+--Empty.Name = "Empty"
+--Empty.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+--Empty.BackgroundTransparency = 0
+--Empty.BorderSizePixel = 0
+--Empty.Position = UDim2.fromScale(0.158, 0.65)
+--Empty.Size = UDim2.fromScale(0.669, 0.092)
+--Empty.Font = Enum.Font.SourceSans
+--Empty.Text = ""
+--Empty.TextColor3 = Color3.fromRGB(197, 197, 197)
+--Empty.TextScaled = true
+--Empty.ZIndex = 2
+
+--local Scan = Instance.new("TextButton", Frame)
+--Scan.Name = "Scan"
+--Scan.BackgroundColor3 = Color3.fromRGB(56, 56, 56)
+--Scan.BackgroundTransparency = 0
+--Scan.BorderSizePixel = 0
+--Scan.Position = UDim2.fromScale(0.19, 0.811)
+--Scan.Size = UDim2.fromScale(0.618, 0.119)
+--Scan.Font = Enum.Font.Gotham
+--Scan.Text = "Scan"
+--Scan.TextColor3 = Color3.fromRGB(197, 197, 197)
+--Scan.TextScaled = true
+--Scan.ZIndex = 2
+
+--local DirSelect_TextLabel = Instance.new("TextLabel", DirSelect)
+--DirSelect_TextLabel.Name = "TextLabel"
+--DirSelect_TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--DirSelect_TextLabel.BackgroundTransparency = 1
+--DirSelect_TextLabel.Position = UDim2.fromScale(0.093, 0.06)
+--DirSelect_TextLabel.Size = UDim2.fromScale(0.813, 0.86)
+--DirSelect_TextLabel.Font = Enum.Font.SourceSans
+--DirSelect_TextLabel.Text = "Choose Directory"
+--DirSelect_TextLabel.TextColor3 = Color3.fromRGB(197, 197, 197)
+--DirSelect_TextLabel.TextScaled = true
+--DirSelect_TextLabel.ZIndex = 2
+
+--local Empty_TextLabel = Instance.new("TextLabel", Empty)
+--Empty_TextLabel.Name = "TextLabel"
+--Empty_TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+--Empty_TextLabel.BackgroundTransparency = 1
+--Empty_TextLabel.Position = UDim2.fromScale(0.085, 0.06)
+--Empty_TextLabel.Size = UDim2.fromScale(0.813, 0.86)
+--Empty_TextLabel.Font = Enum.Font.SourceSans
+--Empty_TextLabel.Text = "Empty Quarantine"
+--Empty_TextLabel.TextColor3 = Color3.fromRGB(197, 197, 197)
+--Empty_TextLabel.TextScaled = true
+--Empty_TextLabel.ZIndex = 2
+
+--local VKeywords_One = Instance.new("TextButton", VKeywords)
+--VKeywords_One.Name = "VKeywords_One"
+--VKeywords_One.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
+--VKeywords_One.BackgroundTransparency = 0
+--VKeywords_One.Position = UDim2.fromScale(1.085, 0.068)
+--VKeywords_One.Size = UDim2.fromScale(0.185, 0.841)
+--VKeywords_One.Font = Enum.Font.Gotham
+--VKeywords_One.Text = "1"
+--VKeywords_One.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VKeywords_One.TextScaled = true
+--VKeywords_One:SetAttribute('Strength', 2)
+--VKeywords_One.ZIndex = 2
+
+--local VKeywords_Two = Instance.new("TextButton", VKeywords)
+--VKeywords_Two.Name = "VKeywords_Two"
+--VKeywords_Two.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
+--VKeywords_Two.BackgroundTransparency = 0
+--VKeywords_Two.Position = UDim2.fromScale(1.32, 0.068)
+--VKeywords_Two.Size = UDim2.fromScale(0.185, 0.841)
+--VKeywords_Two.Font = Enum.Font.Gotham
+--VKeywords_Two.Text = "2"
+--VKeywords_Two.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VKeywords_Two.TextScaled = true
+--VKeywords_Two:SetAttribute('Strength', 2)
+--VKeywords_Two.ZIndex = 2
+
+--local VKeywords_Three = Instance.new("TextButton", VKeywords)
+--VKeywords_Three.Name = "VKeywords_Three"
+--VKeywords_Three.BackgroundColor3 = Color3.fromRGB(64, 161, 235)
+--VKeywords_Three.BackgroundTransparency = 0
+--VKeywords_Three.Position = UDim2.fromScale(1.56, 0.068)
+--VKeywords_Three.Size = UDim2.fromScale(0.185, 0.841)
+--VKeywords_Three.Font = Enum.Font.Gotham
+--VKeywords_Three.Text = "3"
+--VKeywords_Three.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VKeywords_Three.TextScaled = true
+--VKeywords_Three:SetAttribute('Strength', 2)
+--VKeywords_Three.ZIndex = 2
+
+--local VNames_One = Instance.new("TextButton", VNames)
+--VNames_One.Name = "VNames_One"
+--VNames_One.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
+--VNames_One.BackgroundTransparency = 0
+--VNames_One.Position = UDim2.fromScale(1.085, 0.068)
+--VNames_One.Size = UDim2.fromScale(0.185, 0.841)
+--VNames_One.Font = Enum.Font.Gotham
+--VNames_One.Text = "1"
+--VNames_One.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VNames_One.TextScaled = true
+--VNames_One:SetAttribute('Strength', 1)
+--VNames_One.ZIndex = 2
+
+--local VNames_Two = Instance.new("TextButton", VNames)
+--VNames_Two.Name = "VNames_Two"
+--VNames_Two.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
+--VNames_Two.BackgroundTransparency = 0
+--VNames_Two.Position = UDim2.fromScale(1.32, 0.068)
+--VNames_Two.Size = UDim2.fromScale(0.185, 0.841)
+--VNames_Two.Font = Enum.Font.Gotham
+--VNames_Two.Text = "2"
+--VNames_Two.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VNames_Two.TextScaled = true
+--VNames_Two:SetAttribute('Strength', 2)
+--VNames_Two.ZIndex = 2
+
+--local VNames_Three = Instance.new("TextButton", VNames)
+--VNames_Three.Name = "VNames_Three"
+--VNames_Three.BackgroundColor3 = Color3.fromRGB(64, 161, 235)
+--VNames_Three.BackgroundTransparency = 0
+--VNames_Three.Position = UDim2.fromScale(1.56, 0.068)
+--VNames_Three.Size = UDim2.fromScale(0.185, 0.841)
+--VNames_Three.Font = Enum.Font.Gotham
+--VNames_Three.Text = "3"
+--VNames_Three.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VNames_Three.TextScaled = true
+--VNames_Three:SetAttribute('Strength', 3)
+--VNames_Three.ZIndex = 2
+
+--local VSnippets_One = Instance.new("TextButton", VSnippets)
+--VSnippets_One.Name = "VSnippets_One"
+--VSnippets_One.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
+--VSnippets_One.BackgroundTransparency = 0
+--VSnippets_One.Position = UDim2.fromScale(1.085, 0.068)
+--VSnippets_One.Size = UDim2.fromScale(0.185, 0.841)
+--VSnippets_One.Font = Enum.Font.Gotham
+--VSnippets_One.Text = "1"
+--VSnippets_One.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VSnippets_One.TextScaled = true
+--VSnippets_One:SetAttribute('Strength', 1)
+--VSnippets_One.ZIndex = 2
+
+--local VSnippets_Two = Instance.new("TextButton", VSnippets)
+--VSnippets_Two.Name = "VSnippets_Two"
+--VSnippets_Two.BackgroundColor3 = Color3.fromRGB(92, 92, 92)
+--VSnippets_Two.BackgroundTransparency = 0
+--VSnippets_Two.Position = UDim2.fromScale(1.32, 0.068)
+--VSnippets_Two.Size = UDim2.fromScale(0.185, 0.841)
+--VSnippets_Two.Font = Enum.Font.Gotham
+--VSnippets_Two.Text = "2"
+--VSnippets_Two.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VSnippets_Two.TextScaled = true
+--VSnippets_Two:SetAttribute('Strength', 2)
+--VSnippets_Two.ZIndex = 2
+
+--local VSnippets_Three = Instance.new("TextButton", VSnippets)
+--VSnippets_Three.Name = "VSnippets_Three"
+--VSnippets_Three.BackgroundColor3 = Color3.fromRGB(64, 161, 235)
+--VSnippets_Three.BackgroundTransparency = 0
+--VSnippets_Three.Position = UDim2.fromScale(1.56, 0.068)
+--VSnippets_Three.Size = UDim2.fromScale(0.185, 0.841)
+--VSnippets_Three.Font = Enum.Font.Gotham
+--VSnippets_Three.Text = "3"
+--VSnippets_Three.TextColor3 = Color3.fromRGB(255, 255, 255)
+--VSnippets_Three.TextScaled = true
+--VSnippets_Three:SetAttribute('Strength', 3)
+--VSnippets_Three.ZIndex = 2
